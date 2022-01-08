@@ -21,7 +21,7 @@ export class Client {
      * @param includeTypes (optional) 
      * @return Success
      */
-    apiDefinition(includeTypes: boolean | undefined): Promise<ApplicationApiDescriptionModel> {
+    abpApiDefinitionGet(includeTypes: boolean | undefined): Promise<ApplicationApiDescriptionModel> {
         let url_ = this.baseUrl + "/api/abp/api-definition?";
         if (includeTypes === null)
             throw new Error("The parameter 'includeTypes' cannot be null.");
@@ -37,11 +37,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processApiDefinition(_response);
+            return this.processAbpApiDefinitionGet(_response);
         });
     }
 
-    protected processApiDefinition(response: Response): Promise<ApplicationApiDescriptionModel> {
+    protected processAbpApiDefinitionGet(response: Response): Promise<ApplicationApiDescriptionModel> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -104,7 +104,7 @@ export class Client {
     /**
      * @return Success
      */
-    applicationConfiguration(): Promise<ApplicationConfigurationDto> {
+    abpApplicationConfigurationGet(): Promise<ApplicationConfigurationDto> {
         let url_ = this.baseUrl + "/api/abp/application-configuration";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -116,11 +116,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processApplicationConfiguration(_response);
+            return this.processAbpApplicationConfigurationGet(_response);
         });
     }
 
-    protected processApplicationConfiguration(response: Response): Promise<ApplicationConfigurationDto> {
+    protected processAbpApplicationConfigurationGet(response: Response): Promise<ApplicationConfigurationDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -183,7 +183,7 @@ export class Client {
     /**
      * @return Success
      */
-    byName(name: string): Promise<FindTenantResultDto> {
+    abpTenantFindTenantByName(name: string): Promise<FindTenantResultDto> {
         let url_ = this.baseUrl + "/api/abp/multi-tenancy/tenants/by-name/{name}";
         if (name === undefined || name === null)
             throw new Error("The parameter 'name' must be defined.");
@@ -198,11 +198,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processByName(_response);
+            return this.processAbpTenantFindTenantByName(_response);
         });
     }
 
-    protected processByName(response: Response): Promise<FindTenantResultDto> {
+    protected processAbpTenantFindTenantByName(response: Response): Promise<FindTenantResultDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -265,7 +265,7 @@ export class Client {
     /**
      * @return Success
      */
-    byId(id: string): Promise<FindTenantResultDto> {
+    abpTenantFindTenantById(id: string): Promise<FindTenantResultDto> {
         let url_ = this.baseUrl + "/api/abp/multi-tenancy/tenants/by-id/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -280,11 +280,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processById(_response);
+            return this.processAbpTenantFindTenantById(_response);
         });
     }
 
-    protected processById(response: Response): Promise<FindTenantResultDto> {
+    protected processAbpTenantFindTenantById(response: Response): Promise<FindTenantResultDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -348,7 +348,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    register(body: RegisterDto | undefined): Promise<IdentityUserDto> {
+    accountRegister(body: RegisterDto | undefined): Promise<IdentityUserDto> {
         let url_ = this.baseUrl + "/api/account/register";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -364,11 +364,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processRegister(_response);
+            return this.processAccountRegister(_response);
         });
     }
 
-    protected processRegister(response: Response): Promise<IdentityUserDto> {
+    protected processAccountRegister(response: Response): Promise<IdentityUserDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -432,7 +432,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    sendPasswordResetCode(body: SendPasswordResetCodeDto | undefined): Promise<void> {
+    accountSendPasswordResetCode(body: SendPasswordResetCodeDto | undefined): Promise<void> {
         let url_ = this.baseUrl + "/api/account/send-password-reset-code";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -447,11 +447,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processSendPasswordResetCode(_response);
+            return this.processAccountSendPasswordResetCode(_response);
         });
     }
 
-    protected processSendPasswordResetCode(response: Response): Promise<void> {
+    protected processAccountSendPasswordResetCode(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -512,7 +512,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    resetPassword(body: ResetPasswordDto | undefined): Promise<void> {
+    accountResetPassword(body: ResetPasswordDto | undefined): Promise<void> {
         let url_ = this.baseUrl + "/api/account/reset-password";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -527,11 +527,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processResetPassword(_response);
+            return this.processAccountResetPassword(_response);
         });
     }
 
-    protected processResetPassword(response: Response): Promise<void> {
+    protected processAccountResetPassword(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -591,7 +591,7 @@ export class Client {
     /**
      * @return Success
      */
-    emailingGET(): Promise<EmailSettingsDto> {
+    emailSettingsGet(): Promise<EmailSettingsDto> {
         let url_ = this.baseUrl + "/api/setting-management/emailing";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -603,11 +603,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processEmailingGET(_response);
+            return this.processEmailSettingsGet(_response);
         });
     }
 
-    protected processEmailingGET(response: Response): Promise<EmailSettingsDto> {
+    protected processEmailSettingsGet(response: Response): Promise<EmailSettingsDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -671,7 +671,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    emailingPOST(body: UpdateEmailSettingsDto | undefined): Promise<void> {
+    emailSettingsUpdate(body: UpdateEmailSettingsDto | undefined): Promise<void> {
         let url_ = this.baseUrl + "/api/setting-management/emailing";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -686,11 +686,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processEmailingPOST(_response);
+            return this.processEmailSettingsUpdate(_response);
         });
     }
 
-    protected processEmailingPOST(response: Response): Promise<void> {
+    protected processEmailSettingsUpdate(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -752,7 +752,7 @@ export class Client {
      * @param providerKey (optional) 
      * @return Success
      */
-    featuresGET(providerName: string | undefined, providerKey: string | undefined): Promise<GetFeatureListResultDto> {
+    featuresGet(providerName: string | undefined, providerKey: string | undefined): Promise<GetFeatureListResultDto> {
         let url_ = this.baseUrl + "/api/feature-management/features?";
         if (providerName === null)
             throw new Error("The parameter 'providerName' cannot be null.");
@@ -772,11 +772,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processFeaturesGET(_response);
+            return this.processFeaturesGet(_response);
         });
     }
 
-    protected processFeaturesGET(response: Response): Promise<GetFeatureListResultDto> {
+    protected processFeaturesGet(response: Response): Promise<GetFeatureListResultDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -842,7 +842,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    featuresPUT(providerName: string | undefined, providerKey: string | undefined, body: UpdateFeaturesDto | undefined): Promise<void> {
+    featuresUpdate(providerName: string | undefined, providerKey: string | undefined, body: UpdateFeaturesDto | undefined): Promise<void> {
         let url_ = this.baseUrl + "/api/feature-management/features?";
         if (providerName === null)
             throw new Error("The parameter 'providerName' cannot be null.");
@@ -865,11 +865,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processFeaturesPUT(_response);
+            return this.processFeaturesUpdate(_response);
         });
     }
 
-    protected processFeaturesPUT(response: Response): Promise<void> {
+    protected processFeaturesUpdate(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -930,7 +930,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    login(body: UserLoginInfo | undefined): Promise<AbpLoginResult> {
+    loginLogin(body: UserLoginInfo | undefined): Promise<AbpLoginResult> {
         let url_ = this.baseUrl + "/api/account/login";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -946,11 +946,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processLogin(_response);
+            return this.processLoginLogin(_response);
         });
     }
 
-    protected processLogin(response: Response): Promise<AbpLoginResult> {
+    protected processLoginLogin(response: Response): Promise<AbpLoginResult> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -1013,7 +1013,7 @@ export class Client {
     /**
      * @return Success
      */
-    logout(): Promise<void> {
+    loginLogout(): Promise<void> {
         let url_ = this.baseUrl + "/api/account/logout";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1024,11 +1024,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processLogout(_response);
+            return this.processLoginLogout(_response);
         });
     }
 
-    protected processLogout(response: Response): Promise<void> {
+    protected processLoginLogout(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -1089,7 +1089,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    checkPassword(body: UserLoginInfo | undefined): Promise<AbpLoginResult> {
+    loginCheckPassword(body: UserLoginInfo | undefined): Promise<AbpLoginResult> {
         let url_ = this.baseUrl + "/api/account/check-password";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1105,11 +1105,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processCheckPassword(_response);
+            return this.processLoginCheckPassword(_response);
         });
     }
 
-    protected processCheckPassword(response: Response): Promise<AbpLoginResult> {
+    protected processLoginCheckPassword(response: Response): Promise<AbpLoginResult> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -1174,7 +1174,7 @@ export class Client {
      * @param providerKey (optional) 
      * @return Success
      */
-    permissionsGET(providerName: string | undefined, providerKey: string | undefined): Promise<GetPermissionListResultDto> {
+    permissionsGet(providerName: string | undefined, providerKey: string | undefined): Promise<GetPermissionListResultDto> {
         let url_ = this.baseUrl + "/api/permission-management/permissions?";
         if (providerName === null)
             throw new Error("The parameter 'providerName' cannot be null.");
@@ -1194,11 +1194,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPermissionsGET(_response);
+            return this.processPermissionsGet(_response);
         });
     }
 
-    protected processPermissionsGET(response: Response): Promise<GetPermissionListResultDto> {
+    protected processPermissionsGet(response: Response): Promise<GetPermissionListResultDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -1264,7 +1264,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    permissionsPUT(providerName: string | undefined, providerKey: string | undefined, body: UpdatePermissionsDto | undefined): Promise<void> {
+    permissionsUpdate(providerName: string | undefined, providerKey: string | undefined, body: UpdatePermissionsDto | undefined): Promise<void> {
         let url_ = this.baseUrl + "/api/permission-management/permissions?";
         if (providerName === null)
             throw new Error("The parameter 'providerName' cannot be null.");
@@ -1287,11 +1287,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPermissionsPUT(_response);
+            return this.processPermissionsUpdate(_response);
         });
     }
 
-    protected processPermissionsPUT(response: Response): Promise<void> {
+    protected processPermissionsUpdate(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -1351,7 +1351,7 @@ export class Client {
     /**
      * @return Success
      */
-    myProfileGET(): Promise<ProfileDto> {
+    profileGet(): Promise<ProfileDto> {
         let url_ = this.baseUrl + "/api/account/my-profile";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1363,11 +1363,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processMyProfileGET(_response);
+            return this.processProfileGet(_response);
         });
     }
 
-    protected processMyProfileGET(response: Response): Promise<ProfileDto> {
+    protected processProfileGet(response: Response): Promise<ProfileDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -1431,7 +1431,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    myProfilePUT(body: UpdateProfileDto | undefined): Promise<ProfileDto> {
+    profileUpdate(body: UpdateProfileDto | undefined): Promise<ProfileDto> {
         let url_ = this.baseUrl + "/api/account/my-profile";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1447,11 +1447,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processMyProfilePUT(_response);
+            return this.processProfileUpdate(_response);
         });
     }
 
-    protected processMyProfilePUT(response: Response): Promise<ProfileDto> {
+    protected processProfileUpdate(response: Response): Promise<ProfileDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -1515,7 +1515,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    changePassword(body: ChangePasswordInput | undefined): Promise<void> {
+    profileChangePassword(body: ChangePasswordInput | undefined): Promise<void> {
         let url_ = this.baseUrl + "/api/account/my-profile/change-password";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1530,11 +1530,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processChangePassword(_response);
+            return this.processProfileChangePassword(_response);
         });
     }
 
-    protected processChangePassword(response: Response): Promise<void> {
+    protected processProfileChangePassword(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -1594,7 +1594,7 @@ export class Client {
     /**
      * @return Success
      */
-    all(): Promise<ListResultDtoOfIdentityRoleDto> {
+    roleGetAllList(): Promise<ListResultDtoOfIdentityRoleDto> {
         let url_ = this.baseUrl + "/api/identity/roles/all";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1606,11 +1606,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processAll(_response);
+            return this.processRoleGetAllList(_response);
         });
     }
 
-    protected processAll(response: Response): Promise<ListResultDtoOfIdentityRoleDto> {
+    protected processRoleGetAllList(response: Response): Promise<ListResultDtoOfIdentityRoleDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -1677,7 +1677,7 @@ export class Client {
      * @param maxResultCount (optional) 
      * @return Success
      */
-    rolesGET(filter: string | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Promise<PagedResultDtoOfIdentityRoleDto> {
+    roleGetList(filter: string | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Promise<PagedResultDtoOfIdentityRoleDto> {
         let url_ = this.baseUrl + "/api/identity/roles?";
         if (filter === null)
             throw new Error("The parameter 'filter' cannot be null.");
@@ -1705,11 +1705,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processRolesGET(_response);
+            return this.processRoleGetList(_response);
         });
     }
 
-    protected processRolesGET(response: Response): Promise<PagedResultDtoOfIdentityRoleDto> {
+    protected processRoleGetList(response: Response): Promise<PagedResultDtoOfIdentityRoleDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -1773,7 +1773,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    rolesPOST(body: IdentityRoleCreateDto | undefined): Promise<IdentityRoleDto> {
+    roleCreate(body: IdentityRoleCreateDto | undefined): Promise<IdentityRoleDto> {
         let url_ = this.baseUrl + "/api/identity/roles";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1789,11 +1789,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processRolesPOST(_response);
+            return this.processRoleCreate(_response);
         });
     }
 
-    protected processRolesPOST(response: Response): Promise<IdentityRoleDto> {
+    protected processRoleCreate(response: Response): Promise<IdentityRoleDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -1856,7 +1856,7 @@ export class Client {
     /**
      * @return Success
      */
-    rolesGET2(id: string): Promise<IdentityRoleDto> {
+    roleGet(id: string): Promise<IdentityRoleDto> {
         let url_ = this.baseUrl + "/api/identity/roles/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1871,11 +1871,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processRolesGET2(_response);
+            return this.processRoleGet(_response);
         });
     }
 
-    protected processRolesGET2(response: Response): Promise<IdentityRoleDto> {
+    protected processRoleGet(response: Response): Promise<IdentityRoleDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -1939,7 +1939,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    rolesPUT(id: string, body: IdentityRoleUpdateDto | undefined): Promise<IdentityRoleDto> {
+    roleUpdate(id: string, body: IdentityRoleUpdateDto | undefined): Promise<IdentityRoleDto> {
         let url_ = this.baseUrl + "/api/identity/roles/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1958,11 +1958,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processRolesPUT(_response);
+            return this.processRoleUpdate(_response);
         });
     }
 
-    protected processRolesPUT(response: Response): Promise<IdentityRoleDto> {
+    protected processRoleUpdate(response: Response): Promise<IdentityRoleDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -2025,7 +2025,7 @@ export class Client {
     /**
      * @return Success
      */
-    rolesDELETE(id: string): Promise<void> {
+    roleDelete(id: string): Promise<void> {
         let url_ = this.baseUrl + "/api/identity/roles/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -2039,11 +2039,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processRolesDELETE(_response);
+            return this.processRoleDelete(_response);
         });
     }
 
-    protected processRolesDELETE(response: Response): Promise<void> {
+    protected processRoleDelete(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -2103,7 +2103,7 @@ export class Client {
     /**
      * @return Success
      */
-    tenantsGET(id: string): Promise<TenantDto> {
+    tenantGet(id: string): Promise<TenantDto> {
         let url_ = this.baseUrl + "/api/multi-tenancy/tenants/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -2118,11 +2118,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processTenantsGET(_response);
+            return this.processTenantGet(_response);
         });
     }
 
-    protected processTenantsGET(response: Response): Promise<TenantDto> {
+    protected processTenantGet(response: Response): Promise<TenantDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -2186,7 +2186,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    tenantsPUT(id: string, body: TenantUpdateDto | undefined): Promise<TenantDto> {
+    tenantUpdate(id: string, body: TenantUpdateDto | undefined): Promise<TenantDto> {
         let url_ = this.baseUrl + "/api/multi-tenancy/tenants/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -2205,11 +2205,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processTenantsPUT(_response);
+            return this.processTenantUpdate(_response);
         });
     }
 
-    protected processTenantsPUT(response: Response): Promise<TenantDto> {
+    protected processTenantUpdate(response: Response): Promise<TenantDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -2272,7 +2272,7 @@ export class Client {
     /**
      * @return Success
      */
-    tenantsDELETE(id: string): Promise<void> {
+    tenantDelete(id: string): Promise<void> {
         let url_ = this.baseUrl + "/api/multi-tenancy/tenants/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -2286,11 +2286,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processTenantsDELETE(_response);
+            return this.processTenantDelete(_response);
         });
     }
 
-    protected processTenantsDELETE(response: Response): Promise<void> {
+    protected processTenantDelete(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -2354,7 +2354,7 @@ export class Client {
      * @param maxResultCount (optional) 
      * @return Success
      */
-    tenantsGET2(filter: string | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Promise<PagedResultDtoOfTenantDto> {
+    tenantGetList(filter: string | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Promise<PagedResultDtoOfTenantDto> {
         let url_ = this.baseUrl + "/api/multi-tenancy/tenants?";
         if (filter === null)
             throw new Error("The parameter 'filter' cannot be null.");
@@ -2382,11 +2382,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processTenantsGET2(_response);
+            return this.processTenantGetList(_response);
         });
     }
 
-    protected processTenantsGET2(response: Response): Promise<PagedResultDtoOfTenantDto> {
+    protected processTenantGetList(response: Response): Promise<PagedResultDtoOfTenantDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -2450,7 +2450,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    tenantsPOST(body: TenantCreateDto | undefined): Promise<TenantDto> {
+    tenantCreate(body: TenantCreateDto | undefined): Promise<TenantDto> {
         let url_ = this.baseUrl + "/api/multi-tenancy/tenants";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2466,11 +2466,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processTenantsPOST(_response);
+            return this.processTenantCreate(_response);
         });
     }
 
-    protected processTenantsPOST(response: Response): Promise<TenantDto> {
+    protected processTenantCreate(response: Response): Promise<TenantDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -2533,7 +2533,7 @@ export class Client {
     /**
      * @return Success
      */
-    defaultConnectionStringGET(id: string): Promise<string> {
+    tenantGetDefaultConnectionString(id: string): Promise<string> {
         let url_ = this.baseUrl + "/api/multi-tenancy/tenants/{id}/default-connection-string";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -2548,11 +2548,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processDefaultConnectionStringGET(_response);
+            return this.processTenantGetDefaultConnectionString(_response);
         });
     }
 
-    protected processDefaultConnectionStringGET(response: Response): Promise<string> {
+    protected processTenantGetDefaultConnectionString(response: Response): Promise<string> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -2617,7 +2617,7 @@ export class Client {
      * @param defaultConnectionString (optional) 
      * @return Success
      */
-    defaultConnectionStringPUT(id: string, defaultConnectionString: string | undefined): Promise<void> {
+    tenantUpdateDefaultConnectionString(id: string, defaultConnectionString: string | undefined): Promise<void> {
         let url_ = this.baseUrl + "/api/multi-tenancy/tenants/{id}/default-connection-string?";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -2635,11 +2635,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processDefaultConnectionStringPUT(_response);
+            return this.processTenantUpdateDefaultConnectionString(_response);
         });
     }
 
-    protected processDefaultConnectionStringPUT(response: Response): Promise<void> {
+    protected processTenantUpdateDefaultConnectionString(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -2699,7 +2699,7 @@ export class Client {
     /**
      * @return Success
      */
-    defaultConnectionStringDELETE(id: string): Promise<void> {
+    tenantDeleteDefaultConnectionString(id: string): Promise<void> {
         let url_ = this.baseUrl + "/api/multi-tenancy/tenants/{id}/default-connection-string";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -2713,11 +2713,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processDefaultConnectionStringDELETE(_response);
+            return this.processTenantDeleteDefaultConnectionString(_response);
         });
     }
 
-    protected processDefaultConnectionStringDELETE(response: Response): Promise<void> {
+    protected processTenantDeleteDefaultConnectionString(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -2777,7 +2777,7 @@ export class Client {
     /**
      * @return Success
      */
-    usersGET(id: string): Promise<IdentityUserDto> {
+    userGet(id: string): Promise<IdentityUserDto> {
         let url_ = this.baseUrl + "/api/identity/users/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -2792,11 +2792,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processUsersGET(_response);
+            return this.processUserGet(_response);
         });
     }
 
-    protected processUsersGET(response: Response): Promise<IdentityUserDto> {
+    protected processUserGet(response: Response): Promise<IdentityUserDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -2860,7 +2860,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    usersPUT(id: string, body: IdentityUserUpdateDto | undefined): Promise<IdentityUserDto> {
+    userUpdate(id: string, body: IdentityUserUpdateDto | undefined): Promise<IdentityUserDto> {
         let url_ = this.baseUrl + "/api/identity/users/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -2879,11 +2879,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processUsersPUT(_response);
+            return this.processUserUpdate(_response);
         });
     }
 
-    protected processUsersPUT(response: Response): Promise<IdentityUserDto> {
+    protected processUserUpdate(response: Response): Promise<IdentityUserDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -2946,7 +2946,7 @@ export class Client {
     /**
      * @return Success
      */
-    usersDELETE(id: string): Promise<void> {
+    userDelete(id: string): Promise<void> {
         let url_ = this.baseUrl + "/api/identity/users/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -2960,11 +2960,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processUsersDELETE(_response);
+            return this.processUserDelete(_response);
         });
     }
 
-    protected processUsersDELETE(response: Response): Promise<void> {
+    protected processUserDelete(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -3028,7 +3028,7 @@ export class Client {
      * @param maxResultCount (optional) 
      * @return Success
      */
-    usersGET2(filter: string | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Promise<PagedResultDtoOfIdentityUserDto> {
+    userGetList(filter: string | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Promise<PagedResultDtoOfIdentityUserDto> {
         let url_ = this.baseUrl + "/api/identity/users?";
         if (filter === null)
             throw new Error("The parameter 'filter' cannot be null.");
@@ -3056,11 +3056,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processUsersGET2(_response);
+            return this.processUserGetList(_response);
         });
     }
 
-    protected processUsersGET2(response: Response): Promise<PagedResultDtoOfIdentityUserDto> {
+    protected processUserGetList(response: Response): Promise<PagedResultDtoOfIdentityUserDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -3124,7 +3124,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    usersPOST(body: IdentityUserCreateDto | undefined): Promise<IdentityUserDto> {
+    userCreate(body: IdentityUserCreateDto | undefined): Promise<IdentityUserDto> {
         let url_ = this.baseUrl + "/api/identity/users";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3140,11 +3140,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processUsersPOST(_response);
+            return this.processUserCreate(_response);
         });
     }
 
-    protected processUsersPOST(response: Response): Promise<IdentityUserDto> {
+    protected processUserCreate(response: Response): Promise<IdentityUserDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -3207,7 +3207,7 @@ export class Client {
     /**
      * @return Success
      */
-    rolesGET3(id: string): Promise<ListResultDtoOfIdentityRoleDto> {
+    userGetRoles(id: string): Promise<ListResultDtoOfIdentityRoleDto> {
         let url_ = this.baseUrl + "/api/identity/users/{id}/roles";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -3222,11 +3222,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processRolesGET3(_response);
+            return this.processUserGetRoles(_response);
         });
     }
 
-    protected processRolesGET3(response: Response): Promise<ListResultDtoOfIdentityRoleDto> {
+    protected processUserGetRoles(response: Response): Promise<ListResultDtoOfIdentityRoleDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -3290,7 +3290,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    rolesPUT2(id: string, body: IdentityUserUpdateRolesDto | undefined): Promise<void> {
+    userUpdateRoles(id: string, body: IdentityUserUpdateRolesDto | undefined): Promise<void> {
         let url_ = this.baseUrl + "/api/identity/users/{id}/roles";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -3308,11 +3308,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processRolesPUT2(_response);
+            return this.processUserUpdateRoles(_response);
         });
     }
 
-    protected processRolesPUT2(response: Response): Promise<void> {
+    protected processUserUpdateRoles(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -3372,7 +3372,7 @@ export class Client {
     /**
      * @return Success
      */
-    assignableRoles(): Promise<ListResultDtoOfIdentityRoleDto> {
+    userGetAssignableRoles(): Promise<ListResultDtoOfIdentityRoleDto> {
         let url_ = this.baseUrl + "/api/identity/users/assignable-roles";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3384,11 +3384,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processAssignableRoles(_response);
+            return this.processUserGetAssignableRoles(_response);
         });
     }
 
-    protected processAssignableRoles(response: Response): Promise<ListResultDtoOfIdentityRoleDto> {
+    protected processUserGetAssignableRoles(response: Response): Promise<ListResultDtoOfIdentityRoleDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -3451,7 +3451,7 @@ export class Client {
     /**
      * @return Success
      */
-    byUsername(userName: string): Promise<IdentityUserDto> {
+    userFindByUsername(userName: string): Promise<IdentityUserDto> {
         let url_ = this.baseUrl + "/api/identity/users/by-username/{userName}";
         if (userName === undefined || userName === null)
             throw new Error("The parameter 'userName' must be defined.");
@@ -3466,11 +3466,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processByUsername(_response);
+            return this.processUserFindByUsername(_response);
         });
     }
 
-    protected processByUsername(response: Response): Promise<IdentityUserDto> {
+    protected processUserFindByUsername(response: Response): Promise<IdentityUserDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -3533,7 +3533,7 @@ export class Client {
     /**
      * @return Success
      */
-    byEmail(email: string): Promise<IdentityUserDto> {
+    userFindByEmail(email: string): Promise<IdentityUserDto> {
         let url_ = this.baseUrl + "/api/identity/users/by-email/{email}";
         if (email === undefined || email === null)
             throw new Error("The parameter 'email' must be defined.");
@@ -3548,11 +3548,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processByEmail(_response);
+            return this.processUserFindByEmail(_response);
         });
     }
 
-    protected processByEmail(response: Response): Promise<IdentityUserDto> {
+    protected processUserFindByEmail(response: Response): Promise<IdentityUserDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -3615,7 +3615,7 @@ export class Client {
     /**
      * @return Success
      */
-    lookup(id: string): Promise<UserData> {
+    userLookupFindById(id: string): Promise<UserData> {
         let url_ = this.baseUrl + "/api/identity/users/lookup/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -3630,11 +3630,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processLookup(_response);
+            return this.processUserLookupFindById(_response);
         });
     }
 
-    protected processLookup(response: Response): Promise<UserData> {
+    protected processUserLookupFindById(response: Response): Promise<UserData> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -3697,7 +3697,7 @@ export class Client {
     /**
      * @return Success
      */
-    byUsername2(userName: string): Promise<UserData> {
+    userLookupFindByUserName(userName: string): Promise<UserData> {
         let url_ = this.baseUrl + "/api/identity/users/lookup/by-username/{userName}";
         if (userName === undefined || userName === null)
             throw new Error("The parameter 'userName' must be defined.");
@@ -3712,11 +3712,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processByUsername2(_response);
+            return this.processUserLookupFindByUserName(_response);
         });
     }
 
-    protected processByUsername2(response: Response): Promise<UserData> {
+    protected processUserLookupFindByUserName(response: Response): Promise<UserData> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -3783,7 +3783,7 @@ export class Client {
      * @param maxResultCount (optional) 
      * @return Success
      */
-    search(filter: string | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Promise<ListResultDtoOfUserData> {
+    userLookupSearch(filter: string | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Promise<ListResultDtoOfUserData> {
         let url_ = this.baseUrl + "/api/identity/users/lookup/search?";
         if (filter === null)
             throw new Error("The parameter 'filter' cannot be null.");
@@ -3811,11 +3811,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processSearch(_response);
+            return this.processUserLookupSearch(_response);
         });
     }
 
-    protected processSearch(response: Response): Promise<ListResultDtoOfUserData> {
+    protected processUserLookupSearch(response: Response): Promise<ListResultDtoOfUserData> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -3879,7 +3879,7 @@ export class Client {
      * @param filter (optional) 
      * @return Success
      */
-    count(filter: string | undefined): Promise<number> {
+    userLookupGetCount(filter: string | undefined): Promise<number> {
         let url_ = this.baseUrl + "/api/identity/users/lookup/count?";
         if (filter === null)
             throw new Error("The parameter 'filter' cannot be null.");
@@ -3895,11 +3895,11 @@ export class Client {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processCount(_response);
+            return this.processUserLookupGetCount(_response);
         });
     }
 
-    protected processCount(response: Response): Promise<number> {
+    protected processUserLookupGetCount(response: Response): Promise<number> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
